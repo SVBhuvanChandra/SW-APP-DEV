@@ -4,10 +4,25 @@
         <title>Page1</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+            .ribbon {
+                width: 100%;
+                height: 100px;
+                background-color:#b5180d;
+                padding-left:15px; 
+                padding-right:15px;
+            }
+            #home {
+                float:left;
+                padding-top: 25px;
+            }
+            #heads {
+                float: left;
+            }
+
             .container1, .container2, .container3 {
-                widows: 350px;
+                width: 100%;
                 height:330px; 
-                background-color: none; 
+                background-color:none; 
                 padding-top:20px; 
                 padding-left:15px; 
                 padding-right:15px;
@@ -50,7 +65,8 @@
             }
             th {
 			    border: 1px solid grey;
-			    background-color:dimgray;
+			    background-color: #b5180d;
+                color:white;
                 padding: 5px
 		    }
 		    td {
@@ -64,7 +80,9 @@
             input {
 			width: 50%;
 			height: 60px;
-			border: 2px solid lightgrey;
+            border: 2px solid lightgrey;
+            color:navy;
+            font-family:'Courier New', Courier, monospace;
             }
             #forms {
                 margin: 20px;
@@ -74,8 +92,14 @@
         </style>
     </head>
     <body>
-        <a href="MyProject.html"><img src="home1.jpg" alt="wtrain" width="55px" height="55px"></a>
-        <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color:crimson; font-style: italic; font-size: 45px; margin-left: 20px;">MUSCLE BUILDING</h1>
+        <div class="ribbon">
+            <div id="home">
+                <a href="MyProject.html"><img src="home1.jpg" alt="wtrain" width="55px" height="55px"></a>
+            </div>
+            <div id="heads">
+                <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color:black; font-style: italic; font-size: 45px; margin-left: 30px;">MUSCLE BUILDING</h1>
+            </div>
+        </div>
         <div class="container1">
             <div id="exclip">
                 <img src="curl.gif" alt="curl" width="320px">
@@ -205,7 +229,6 @@
             </div>
         </div>
         <div id = "forms">
-            <h3 style="color:crimson; font-size: 17; font-family: sans-serif;">Please give me your feedback on the content.</h3>
             <form>
                 <input type="text" placeholder = "Give your valued Feedback..." name="Feedback">
                 <button style="background-color: lightgrey; font-weight: bold; width: 85px; height: 40px;">Submit</button>

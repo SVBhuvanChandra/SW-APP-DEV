@@ -44,6 +44,13 @@ div.mode {
  img:hover {
      border: 2px solid lightgray;   
  }
-body {
-    background-image : "work1.jpg";
+@media (min-width: 600px) {
+    body {
+        background-image : url('work1.jpg');
+    }
+}
+@media (max-width: 599px) {
+    body {
+        background-image: url('small1.jpg');
+    }
 }
