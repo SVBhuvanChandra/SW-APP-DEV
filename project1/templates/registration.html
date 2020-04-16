@@ -40,14 +40,15 @@
     </head>
     <body style="background-color: rgba(17, 14, 14, 0.938);">
         <div class="conatiner">
+            <form action="{{url_for('register')}}" method="POST">
             <h1 style="margin-left: 15%; color:lightgray; font-size: 40px;"> Sign Up</h1>
             <p style="margin-left: 15%; color:grey;">Please fill in this form to rigister.</p>
             <hr>
             <label for="uname" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family:'Courier New', Courier, monospace;"><b>Username</b></label><br>
-            <input type="text" placeholder="Enter Username" name="username" style="width: 25%;" required><br>
+            <input type="text" placeholder="Enter Username" name="name" style="width: 25%;" required><br>
 
             <label for="pswd" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family: 'Courier New', Courier, monospace;"><b>Password</b></label><br>
-            <input type="password" placeholder="Enter Password" name="pswd" style="width: 25%; background-color:none;" required><br>
+            <input type="password" placeholder="Enter Password" name="Password" style="width: 25%; background-color:none;" required><br>
 
             <label for="conf-pswd" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family: 'Courier New', Courier, monospace;"><b>Repeat Password</b></label><br>
             <input type="password" placeholder="Repeat Password" name="conf-pswd" style="width: 25%;" required><br>
@@ -66,7 +67,11 @@
             <input type="date" id="dob" name="dob" style="background-color:lightgray; color: black; font-family: 'Courier New', Courier, monospace; margin-top: 10px;"><br>
 
             <button type="button" class="cancelbtn">Cancel</button>
-            <button type="button" class="signupbtn">Sign Up</button>
+            <button type="submit" class="signupbtn">Sign Up</button>
+            </form>
+            {% if name %}
+            <h2 style="color: whitesmoke; margin-left: 15%;">Hello {{name}}, Regsitered Successfully.</h2>
+             {% endif %}
 
         </div>
         

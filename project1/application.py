@@ -26,7 +26,11 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     return "Project 1: TODO"
-    # return "registration.html"
-@app.route("/registration")
+@app.route("/registration", methods = ['GET', 'POST'])
 def register():
+    if request.method=="POST":
+        name = request.form.get("name")
+        pswd = request.form.get("Password")
+        print(pswd)
+        return render_template("registration.html", name = name)
     return render_template("registration.html")
