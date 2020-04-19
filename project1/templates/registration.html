@@ -17,8 +17,8 @@
                 margin-bottom: 15px;
                 margin-left: 15%;
             }
-            .cancelbtn {
-                background-color: red;
+            .loginbtn {
+                background-color:navy;
                 margin-left: 15%;
                 border: none;
                 width: 100px;
@@ -66,13 +66,20 @@
             <label for="dob" style="margin-left: 15%; color: lightgray; font-size: 20px;font-family: 'Courier New', Courier, monospace;font-weight: bold;">Date of Birth:</label><br>
             <input type="date" id="dob" name="dob" style="background-color:lightgray; color: black; font-family: 'Courier New', Courier, monospace; margin-top: 10px;"><br>
 
-            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" formaction="auth" class="loginbtn" value="Login">Login</button>
             <button type="submit" class="signupbtn">Sign Up</button>
             </form>
             {% if name %}
-            <h2 style="color: whitesmoke; margin-left: 15%;">Hello {{name}}, Regsitered Successfully.</h2>
-             {% endif %}
+                <h2 style="color: whitesmoke; margin-left: 15%;">Hello {{name}}, Regsitered Successfully.</h2>
+            {% endif %}
 
+            {% if name1 %}
+                <h2 style="color:yellow; margin-left: 15%;">Username {{name1}}, already exists. Please try another.</h2>
+            {% endif %}
+
+            {% if message %}
+                <h2 style="color: whitesmoke; margin-left: 15%;"> {{message}}</h2>
+            {% endif %}
         </div>
         
     </body>

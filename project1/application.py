@@ -35,16 +35,20 @@ db.create_all()
 def index():
     return "Project 1: TODO"
 
+@app.route("/admin")
+def admin():
+    users = User.query.order_by("timestamp").all()
+    return render_template("admin.html", users = users)
+
 @app.route("/registration", methods = ['GET', 'POST'])
 def register():
     if request.method=="POST":
         name = request.form.get("name")
         print(name)
-        pswd = request.form.get("Password")
-        print(pswd)
-        return render_template("registration.html", name = name)
-        regist = User(username = name, password = pswd)
-        if User.query.get(regist):
+        password = request.form.get("Password")
+        print(password)
+        regist = User(username = name, password = password)
+        if User.query.get(name):
             return render_template("registration.html", name1 = name)
         db.session.add(regist)
         db.session.commit()
@@ -53,19 +57,19 @@ def register():
 
 @app.route("/auth", methods = ['GET', 'POST'])
 def auth():
-    if(request.method == 'POST'):
+    if(request.method=="POST"):
         name = request.form.get("name")
         print(name)
-        pswd = request.form.get("Password")
-        print(pswd)
+        password = request.form.get("Password")
+        print(password)
         obj = User.query.get(name)
         if obj is None:
             return render_template("registration.html", message = "Invalid Credentials")
-        if (obj.username == name and obj.password == pswd):
+        if (obj.username == name and obj.password == password):
             return render_template("login.html", name=name)
-        if (obj.username != name or obj.password != pswd):
+        if (obj.username != name or obj.password != password):
             return render_template("registration.html", message = "Invalid Credentials")
-    return render_template("register.html", message = "Invalid Credentials")
+    return render_template("registration.html", message = "Invalid Credentials")
 
 @app.route("/logout")
 def logout():
