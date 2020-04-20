@@ -24,6 +24,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.app_context().push()
 
 db.init_app(app)
+app.secret_key = "temp"
+
 db.create_all()
 
 # Set up database
@@ -33,11 +35,16 @@ db.create_all()
 #Below implementation to redirect to route.
 @app.route("/")
 def index():
-    return "Welcome to Project 1"
+    if 'username' in session:
+        username = session['username']
+        return render_template("login.html", name=username)
+    else:
+        return render_template("registration.html")
 
 @app.route("/admin")
 def admin():
     users = User.query.order_by("timestamp").all()
+    # users = User.query.order_by(User.user_created_on.desc())
     return render_template("admin.html", users = users)
 
 # Below implementation is to redirect to Registration page
@@ -68,6 +75,7 @@ def auth():
         if obj is None:
             return render_template("registration.html", message = "Invalid Credentials")
         if (obj.username == name and obj.password == password):
+            session['username'] = request.form.get("name")
             return render_template("login.html", name=name)
         if (obj.username != name or obj.password != password):
             return render_template("registration.html", message = "Invalid Credentials")
@@ -76,5 +84,5 @@ def auth():
 # Below implementation is to redirects back after Logout.
 @app.route("/logout")
 def logout():
-    session.clear()
+    session.pop('username')
     return render_template("registration.html")
