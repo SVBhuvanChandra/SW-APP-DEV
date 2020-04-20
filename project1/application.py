@@ -30,16 +30,17 @@ db.create_all()
 # engine = create_engine(os.getenv("DATABASE_URL"))
 # db = scoped_session(sessionmaker(bind=engine))
 
-
+#Below implementation to redirect to route.
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    return "Welcome to Project 1"
 
 @app.route("/admin")
 def admin():
     users = User.query.order_by("timestamp").all()
     return render_template("admin.html", users = users)
 
+# Below implementation is to redirect to Registration page
 @app.route("/registration", methods = ['GET', 'POST'])
 def register():
     if request.method=="POST":
@@ -55,6 +56,7 @@ def register():
         return render_template("registration.html", name = name)
     return render_template("registration.html")
 
+# Below implementation is to redirect to Login page
 @app.route("/auth", methods = ['GET', 'POST'])
 def auth():
     if(request.method=="POST"):
@@ -71,6 +73,7 @@ def auth():
             return render_template("registration.html", message = "Invalid Credentials")
     return render_template("registration.html", message = "Invalid Credentials")
 
+# Below implementation is to redirects back after Logout.
 @app.route("/logout")
 def logout():
     session.clear()
