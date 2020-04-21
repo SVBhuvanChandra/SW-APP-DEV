@@ -5,7 +5,7 @@ from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask import render_template, request, session
-from books import *
+from data import *
 import csv
 
 app1 = Flask(__name__)
@@ -23,16 +23,16 @@ app1.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app1.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app1.app_context().push()
 
-db1.init_app(app1)
-db1.create_all()
+db.init_app(app1)
+db.create_all()
 
 def uploadcsv():
     csvfile = open("books.csv")
     reader = csv.reader(csvfile)
     for isbn,title, author,year in reader:
         b = Book(isbn = isbn, title = title, author = author, year = year)
-        db1.session.add(b)
-    db1.session.commit()
+        db.session.add(b)
+    db.session.commit()
 
 if __name__ == "__main__":
     uploadcsv()
