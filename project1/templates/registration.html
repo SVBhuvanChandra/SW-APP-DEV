@@ -1,86 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Registration Page</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            hr {
-                border: 1px solid lightgray;
-                margin-bottom: 20px;
+  <head>
+    <title>Registration Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        function registerCheck() {
+            console.log("entered")
+            var username = document.querySelector('#email').value;
+            var pswd = document.querySelector('#Password').value;
+            var errorMessage = "";
+
+            if (username.length === 0) {
+                document.querySelector('#error').innerHTML = "Please enter your email ID.";
+                return false;
             }
-            label {
-                font-family: 'Times New Roman', Times, serif;               
+
+            if (pswd.length === 0){
+                document.querySelector('#error').innerHTML = "Please enter your password.";
+                return false;
+            }    
+             
+            if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(username)) {
+
+            } else {
+                document.querySelector('#error').innerHTML = "Please enter a valid email ID.";
+                return false;
             }
-            input {
-                padding: 5px;
-                margin-top: 5px;
-                margin-bottom: 15px;
-                margin-left: 15%;
+
+            if (document.querySelector('#Password').value.length < 6 ) {
+                document.querySelector('#error').innerHTML = "Password should have atleast 6 characters.";
+                return false;
             }
-            .loginbtn {
-                background-color:navy;
-                margin-left: 15%;
-                border: none;
-                width: 100px;
-                height: 35px;
-                color: white;
+            const pass = document.querySelector('#Password').value;
+
+            if (!/[a-z]/.test(pass)) {
+                errorMessage += "Password should contain atleast one lowercase alphabet." + "\n"; 
             }
-            .signupbtn {
-                background-color: green;
-                border: none;
-                width: 100px;
-                height: 35px;
-                color: white;
+
+            if (!/[A-Z]/.test(pass)) {
+                errorMessage += "Password should contain atleast one uppercase alphabet." + "\n"; 
             }
-            button:hover {
-                border: 2px solid white;
+                
+            if (!/[0-9]/.test(pass)) {
+                errorMessage += "Password should contain atleast one number." + "\n"; 
             }
-            
-        </style>
-    </head>
-    <body style="background-color: #66130d;">
-        <div class="conatiner">
-            <form action="{{url_for('register')}}" method="POST">
-            <h1 style="margin-left: 15%; color:lightgray; font-size: 40px;"> Sign Up</h1>
-            <p style="margin-left: 15%; color:grey;">Please fill in this form to rigister.</p>
-            <hr>
-            <label for="uname" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family:'Courier New', Courier, monospace;"><b>Username</b></label><br>
-            <input type="text" placeholder="Enter Username" name="name" style="width: 25%;" required><br>
 
-            <label for="pswd" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family: 'Courier New', Courier, monospace;"><b>Password</b></label><br>
-            <input type="password" placeholder="Enter Password" name="Password" style="width: 25%; background-color:none;" required><br>
+            if (!/[!@#\$%\^\&*\)\(+=._-]/.test(pass)) {
+                errorMessage += "Password should contain atleast one symbol." + "\n"; 
+            }
 
-            <label for="conf-pswd" style="color:lightgray; font-size: 20px; margin-left: 15%; padding: 5px; font-family: 'Courier New', Courier, monospace;"><b>Repeat Password</b></label><br>
-            <input type="password" placeholder="Repeat Password" name="conf-pswd" style="width: 25%;" required><br>
+            if (errorMessage === ""){
+                return true;
+            }
 
-            <p style="margin-left: 15%; color: lightgray; font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: bold;">Select Gender</p>
-            <input type="radio" id="male" name="gender" value="male">
-            <label for="male" style="color: yellow; font-family: 'Courier New', Courier, monospace;">Male</label><br>
+            document.querySelector('#error').innerHTML = errorMessage;
 
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female" style="color: yellow;font-family: 'Courier New', Courier, monospace;">Female</label><br>
+            return false;
 
-            <input type="radio" id="other" name="gender" value="other">
-            <label for="other" style="color: yellow; font-family: 'Courier New', Courier, monospace;">Other</label><br>
-
-            <label for="dob" style="margin-left: 15%; color: lightgray; font-size: 20px;font-family: 'Courier New', Courier, monospace;font-weight: bold;">Date of Birth:</label><br>
-            <input type="date" id="dob" name="dob" style="background-color:lightgray; color: black; font-family: 'Courier New', Courier, monospace; margin-top: 10px;"><br>
-
-            <button type="submit" formaction="auth" class="loginbtn" value="Login">Login</button>
-            <button type="submit" class="signupbtn">Sign Up</button>
-            </form>
-            {% if name %}
-                <h2 style="color: whitesmoke; margin-left: 15%;">Hello {{name}}, Regsitered Successfully.</h2>
-            {% endif %}
-
-            {% if name1 %}
-                <h2 style="color:yellow; margin-left: 15%;">Username {{name1}}, already exists. Please try another.</h2>
-            {% endif %}
-
-            {% if message %}
-                <h2 style="color: whitesmoke; margin-left: 15%;"> {{message}}</h2>
-            {% endif %}
+          }
+        </script>
+      <style>
+        .container {
+          color:white;
+        }
+        .form-group{
+          width:18%;
+        }
+        hr {
+          border: 1px solid whitesmoke;
+        }
+        h5 {
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          font-weight: bold;
+        }
+      </style>
+  </head>
+  <body style = "background-color: rgb(37, 3, 3)">
+    <div class="container">
+    <h1 style="font-family: sans-serif; font-size: 45px;">Sign Up</h1>
+    <h5 style="color: lightgray;">Fill in this form to register. Please login if you already have an account.</h5>
+    <br>
+    <hr>
+    <form id = "reg-form" method="POST">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label for="username" style="font-size: 18px; color: lightgray;">Username *</label>
+          <span id="error_username" class="text-danger"></span>
         </div>
-        
-    </body>
+        <input type="Username" id = "email" class="form-control" name="name" placeholder="Enter your email ID" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;" required>
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1" style="font-size: 18px; color: lightgray;">Password *</span>
+        </div>
+        <input type="Password" id = "Password" class="form-control" name="Password" placeholder="password: a-z,A-Z,0-9,special character" aria-label="Password" aria-describedby="basic-addon1" style="width: 350px;">
+      </div>
+      <br>
+      <br>
+      <button type="submit" onclick = "return registerCheck()" class="btn btn-danger" formaction = "{{ url_for('register') }}" id = "submit" style="background-color: blue; border-color: blue;">Sign Up</button>
+      <button type="submit" formaction="{{ url_for('auth') }}" class= "btn btn-danger" value="Login">Login</button>
+      </form>
+    </div>
+      {% if name %}
+      <h5 style="color:white;padding-left:230px">Congratulations {{name}}, 
+      <br>
+      you registered successfully.</h5>
+      {% endif %}
+      {% if name1 %}
+      <h5 style="color:white;padding-left:230px">Hello {{name1}},
+      <br>
+      this username already exists.
+       please try another.</h5>
+      {% endif %}
+      {% if message %}
+      <h6 style="color: red;"> {{message}}</h6>
+      {% endif %}
+      <br>
+      <br>
+      <p>
+        <h4 id = "error" style = "text-align:left;padding-left:230px;color:orange;"></h4>
+      </p>
+  </body>
 </html>
+
+
